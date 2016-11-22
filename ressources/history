@@ -1,0 +1,22 @@
+ls
+clear
+pwd
+cd | cat -e
+ls
+cd -
+ls
+'
+
+
+
+
+
+
+
+
+
+
+
+
+'
+clear
