@@ -46,31 +46,31 @@ static	int		ck(char *str)
 
 static	char	*read_read(void)
 {
-	char	b[9];
-	char	*ret;
-	char	*tmp;
+	char	b[4];
+	char	*ret[2];
 
-	ft_bzero(b, 9);
-	ret = ft_strdup("");
+	ft_bzero(b, 4);
+	ret[0] = ft_strdup("");
 	ft_putstr_c(GREEN, "Read> ");
-	while (read(0, b, 9) && !ENTER)
+	while (read(0, b, 4) && !ENTER)
 	{
-		if (BACK_SPACE && ret && ft_strlen(ret) > 0)
+		if (BACK_SPACE && ret[0] && ft_strlen(ret[0]) > 0)
 		{
 			tputs(tgoto(LESTR, 0, 0), 1, ft_tputs);
 			tputs(DCSTR, 1, ft_tputs);
-			tmp = ft_strsub(ret, 0, ft_strlen(ret) - 1);
-			free(ret);
-			ret = tmp;
+			ret[1] = ft_strsub(ret[0], 0, ft_strlen(ret[0]) - 1);
+			free(ret[0]);
+			ret[0] = ret[1];
 		}
-		else
+		else if (ft_isprint(b[0]))
 		{
 			ft_putchar(b[0]);
-			ret = ft_strfjoin(ret, b);
+			ret[0] = ft_strfjoin(ret[0], b);
 		}
+		ft_bzero(b, 4);
 	}
 	ft_putchar('\n');
-	return (ret);
+	return (ret[0]);
 }
 
 int				builtins_read(t_list **env, char **cmds)
